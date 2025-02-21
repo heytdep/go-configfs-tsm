@@ -45,22 +45,18 @@ func GetRawQuote(reportData [64]byte) ([]uint8, error) {
 }
 
 func TestConfigfs(t *testing.T) {
-	req := &Request{
-		InBlob:     []byte("lessthan64bytesok"),
-		GetAuxBlob: true,
+	var arr [64]byte
+	for i := range arr {
+		arr[i] = 3
 	}
 	fmt.Printf("in tsm client")
 	var err error
-	client, err := lt.MakeClient()
-	r, err := Create(client, req)
-	
 	if err != nil {
 		panic("")
 	}
-
-	//var response *Response
-	response, err := r.Get()
-	fmt.Printf("got response %x", response.OutBlob)
+	resp, err := GetRawQuote(arr)
+	
+	fmt.Printf("got response %x", resp)
 }
 
 func TestGet(t *testing.T) {
