@@ -25,6 +25,25 @@ import (
 	lt "github.com/google/go-configfs-tsm/configfs/linuxtsm"
 )
 
+
+func GetRawQuote(reportData [64]byte) ([]uint8, error) {
+	req := &Request{
+		InBlob:     reportData[:],
+		GetAuxBlob: false,
+	}
+	fmt.Printf("getting raw quote through tsm")
+	client, err := lt.MakeClient()
+	r, err := Create(client, req)
+	fmt.Printf("created report")
+	
+	if err != nil {
+		panic("")
+	}
+	response, err := r.Get()
+	
+	return response.OutBlob, nil
+}
+
 func TestConfigfs(t *testing.T) {
 	req := &Request{
 		InBlob:     []byte("lessthan64bytesok"),
