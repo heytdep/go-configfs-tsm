@@ -41,7 +41,7 @@ func TestConfigfs(t *testing.T) {
 
 	//var response *Response
 	response, err := r.Get()
-	fmt.Printf("got response %x", response)
+	fmt.Printf("got response %x", response.OutBlob)
 }
 
 func TestGet(t *testing.T) {
