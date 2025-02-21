@@ -117,11 +117,16 @@ func CreateOpenReport(client configfsi.Client) (*OpenReport, error) {
 
 // UnsafeWrap returns a new OpenReport for a given report entry.
 func UnsafeWrap(client configfsi.Client, entryPath string) (r *OpenReport, err error) {
+	fmt.Printf("got entrypath %s\n", entryPath)
 	p, _ := configfsi.ParseTsmPath(entryPath)
+	fmt.Printf("parsed %s %s %s\n", p.Attribute, p.Entry, p.Subsystem)
+	fmt.Printf("to string %s\n", p.String())
 	r = &OpenReport{
 		client: client,
 		entry:  &configfsi.TsmPath{Subsystem: subsystem, Entry: p.Entry},
 	}
+	fmt.Printf("r entry %s %s %s\n", r.entry.Attribute, r.entry.Entry, r.entry.Subsystem)
+	
 	fmt.Printf("It's %s %s\n", r.attribute("generation"), r.entry.String())
 	r.expectedGeneration, err = readUint64File(client, r.attribute("generation"))
 	if err != nil {
