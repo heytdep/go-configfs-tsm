@@ -122,6 +122,7 @@ func UnsafeWrap(client configfsi.Client, entryPath string) (r *OpenReport, err e
 		client: client,
 		entry:  &configfsi.TsmPath{Subsystem: subsystem, Entry: p.Entry},
 	}
+	fmt.Printf("It's %s %s\n", r.attribute("generation"), r.entry.String())
 	r.expectedGeneration, err = readUint64File(client, r.attribute("generation"))
 	if err != nil {
 		// The report was created but couldn't be properly initialized.
