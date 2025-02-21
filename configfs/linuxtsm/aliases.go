@@ -18,12 +18,15 @@ package linuxtsm
 // Linux client.
 
 import (
+	"fmt"
+
 	"github.com/google/go-configfs-tsm/report"
 	"go.uber.org/multierr"
 )
 
 // GetReport returns a one-shot configfs-tsm report given a report request.
 func GetReport(req *report.Request) (*report.Response, error) {
+	fmt.Printf("in tsm client")
 	var err error
 	client, err := MakeClient()
 	if err != nil {
