@@ -1,20 +1,21 @@
-package report
+package main
 
 import (
 	"fmt"
 
 	lt "github.com/google/go-configfs-tsm/configfs/linuxtsm"
+	report "github.com/google/go-configfs-tsm/report"
 )
 
 
 func TGetRawQuote(reportData [64]byte) ([]uint8, error) {
-	req := &Request{
+	req := &report.Request{
 		InBlob:     reportData[:],
 		GetAuxBlob: false,
 	}
 	fmt.Printf("getting raw quote through tsm")
 	client, err := lt.MakeClient()
-	r, err := Create(client, req)
+	r, err := report.Create(client, req)
 	fmt.Printf("created report")
 	
 	if err != nil {
