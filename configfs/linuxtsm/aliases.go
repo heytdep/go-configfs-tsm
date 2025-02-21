@@ -17,14 +17,9 @@ package linuxtsm
 // The aliases.go file is for "convenience" functions when folks only want to use the
 // Linux client.
 
-import (
-	"fmt"
+//"github.com/google/go-configfs-tsm/report"
 
-	"github.com/google/go-configfs-tsm/report"
-	"go.uber.org/multierr"
-)
-
-// GetReport returns a one-shot configfs-tsm report given a report request.
+/*// GetReport returns a one-shot configfs-tsm report given a report request.
 func GetReport(req *report.Request) (*report.Response, error) {
 	fmt.Printf("in tsm client")
 	var err error
@@ -39,3 +34,4 @@ func GetReport(req *report.Request) (*report.Response, error) {
 	response, err := r.Get()
 	return response, multierr.Combine(r.Destroy(), err)
 }
+*/

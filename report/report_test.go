@@ -16,12 +16,33 @@ package report
 
 import (
 	"bytes"
+	"fmt"
 	"strings"
 	"testing"
 
 	"github.com/google/go-configfs-tsm/configfs/configfsi"
 	"github.com/google/go-configfs-tsm/configfs/faketsm"
+	lt "github.com/google/go-configfs-tsm/configfs/linuxtsm"
 )
+
+func TestConfigfs(t *testing.T) {
+	req := &Request{
+		InBlob:     []byte("lessthan64bytesok"),
+		GetAuxBlob: true,
+	}
+	fmt.Printf("in tsm client")
+	var err error
+	client, err := lt.MakeClient()
+	r, err := Create(client, req)
+	
+	if err != nil {
+		panic("")
+	}
+
+	//var response *Response
+	response, err := r.Get()
+	fmt.Printf("got response %x", response)
+}
 
 func TestGet(t *testing.T) {
 	c := &faketsm.Client{Subsystems: map[string]configfsi.Client{"report": faketsm.ReportV7(0)}}
